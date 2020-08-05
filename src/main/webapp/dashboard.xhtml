@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+  <title>DashBoard</title>
+</h:head>
+
+<h:body>
+	<h1>See button below?</h1>
+	<p:button value="Go to Admin Page" outcome="admin.xhtml"></p:button>
+	
+  <div class="authorization-div">
+    <sec:authorize access="hasRole('USER')">
+      <p:outputLabel value="You have the USER role" />
+    </sec:authorize>
+    <sec:authorize access="hasRole('ADMIN')">
+      <p:outputLabel value="You have the ADMIN role" />
+    </sec:authorize>
+  </div>
+</h:body>
+</html>
