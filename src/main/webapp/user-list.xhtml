@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Admin</title>
+</h:head>
+<h:body>
+	<p:panel header="Employee Manager" style="font-size:28px; font-family:impact; background-color:#3c6382">
+	</p:panel>
+	<p:tabMenu style="font-family:impact">
+			<p:menuitem value="Employee Directory" outcome="user-list.xhtml" icon="pi pi-users"/>
+			<p:menuitem value="Home" outcome="dashboard.xhtml"/>
+			<p:menuitem value="Add User" outcome="add-user.xhtml" icon="pi pi-user-plus"/>	
+	</p:tabMenu>
+	<h:form>
+		<p:panel header="Employee Record" style="background-color:#EAF0F1; font-family:tahoma">
+			<p:dataTable var="user" value="#{userBean.userList}" style="font-family:tahoma">
+				<p:column>
+					<f:facet name="header">Employee ID</f:facet>
+					<p:outputLabel value="#{user.userId}"></p:outputLabel>
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">First Name</f:facet>
+					<p:outputLabel value="#{user.firstName}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Last Name</f:facet>
+					<p:outputLabel value="#{user.lastName}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Reporting To</f:facet>
+					<p:outputLabel value="#{user.reportingManager}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Username</f:facet>
+					<p:outputLabel value="#{user.username}"></p:outputLabel>
+				</p:column>
+				<p:column>
+					<f:facet name="header">Delete</f:facet>
+					<p:commandButton value="Remove" action="#{userBean.delete(user.id)}"></p:commandButton>
+				</p:column>
+				<f:facet name="footer">	
+				</f:facet>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:panel style="background-color:#3c6382">
+  		<h:form>
+  			<p:commandButton value="Logout" action="#{loginBean.logout()}" style="font-family:impact"></p:commandButton>
+  		</h:form>
+  	</p:panel>
+</h:body>
+</html>

@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Add Employee</title>
+	<h:outputStylesheet library="css" name="add-employee.css"></h:outputStylesheet>
+
+</h:head>
+<h:body style="background-color:#ced6e0">
+	<div
+		style="text-align: center; margin-left: 350px; margin-right: 350px; border-radius: 10px; border-color: #006080; font-family: Arial, Helvetica, sans-serif; background-color: white">
+		<h:form>
+			<legend
+				style="border-radius: 10px; color: white; font-size: 20px; font-weight: bold; background-color: #005e80; padding: 10px; border-bottom-style: solid;">Add
+				Employee</legend>
+			<ul>
+				<h:outputLabel for="userId" value="User Id : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="userId" type="text" value="#{userBean.userId}"
+						required="true" validatorMessage="This is a required field">
+						<f:validateLength minimum="3" />
+						<p:ajax event="blur" update="userIdMsg" />
+					</p:inputText> <p:message id="userIdMsg" for="userId" display="icon" /></li>
+				<br />
+				<h:outputLabel for="fName" value="First Name : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="firstName" type="text" value="#{userBean.firstName}"
+						required="true" validatorMessage="This is a required field">
+						<f:validateLength minimum="3" />
+						<p:ajax event="blur" update="nameMsg" />
+					</p:inputText> <p:message id="nameMsg" for="firstName" display="icon" /></li>
+				<br />
+
+				<h:outputLabel for="lastName" value="Last Name : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="lastName" value="#{userBean.lastName}" required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax event="blur" update="lastNameMsg" />
+					</p:inputText> <p:message id="lastNameMsg" for="lastName" display="icon" /></li>
+				<br />
+				 
+				<h:outputLabel for="reportingManager" value="Reporting Manager : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="reportingManager" value="#{userBean.reportingManager}">
+						<f:validateLength minimum="3" />
+						<p:ajax event="blur" update="repManMsg" />
+					</p:inputText> <p:message id="repManMsg" for="reportingManager" display="icon" /></li>
+				<br />
+				<h:outputLabel for="username" value="User Name : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="username" value="#{userBean.username}">
+						<f:validateLength minimum="3" />
+						<p:ajax event="blur" update="usernameMsg" />
+					</p:inputText> <p:message id="usernameMsg" for="username" display="icon" /></li>
+				<br />
+				
+				<h:outputLabel for="password" value="Password : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px"><p:inputText
+						id="password" value="#{userBean.password}">
+						<f:validateLength minimum="3" />
+						<p:ajax event="blur" update="passMsg" />
+					</p:inputText> <p:message id="passMsg" for="password" display="icon" /></li>
+				<br />
+				
+				<h:outputLabel for="role" value="Assign Role : "
+					style="color:#005e80" />
+				<li style="list-style: none; margin-top: 10px">
+					<p:selectOneMenu value="#{userBean.roleAssigned}">
+						<f:selectItem itemValue="USER" itemLabel="USER"></f:selectItem>
+						<f:selectItem itemValue="ADMIN" itemLabel="ADMIN"></f:selectItem>
+						<f:selectItem itemValue="ADMIN" itemLabel="OTHER"></f:selectItem>
+					</p:selectOneMenu>
+				</li>
+				<br />
+					
+				 
+				<li style="list-style: none; margin-top: 40px"><p:commandButton
+						id="addUser" value="Save" action="#{userBean.add(userBean)}"
+						ajax="false"
+						style="background-color:#239023; color: white; border-radius: 10px" />
+				</li>
+			</ul>
+
+		</h:form>
+		<div
+			style="background-color: #005e80; padding: 5px; margin-top: 5px; border-radius: 10px">
+		</div>
+	</div>
+</h:body>
+</html>

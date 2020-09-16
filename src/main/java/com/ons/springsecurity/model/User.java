@@ -1,5 +1,6 @@
 package com.ons.springsecurity.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -22,27 +23,40 @@ public class User {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	@Column (name = "id")
+	//@Column (name = "id")
 	private long id;
 	
-	@Column (name = "username")
+	private String userId;
+	
+	private String firstName;
+	
+	//@Column (name = "lastName")
+	private String lastName;
+	
+	//@Column (name = "reportingManager")
+	private String reportingManager;
+	
+	//@Column (name = "username")
 	private String username;
 	
-	@Column (name = "password")
+	//@Column (name = "password")
 	private String password;
 	
-	@Column (name = "enabled")
+	//@Column (name = "enabled")
 	private boolean enabled;
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable (name = "user_role", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
-	private Set<Role> roles;
+	private List<Role> roles; 
 
 	public User(User user) {
 		this.username= user.getUsername();
 		this.password=user.getPassword();
 		this.roles=user.getRoles();
 		this.enabled=user.isEnabled();
+		this.firstName=user.getFirstName();
+		this.lastName=user.getLastName();
+		this.reportingManager=user.getReportingManager();
+		
 	}
 	
 	public User() {
@@ -81,11 +95,44 @@ public class User {
 		this.enabled = enabled;
 	}
 
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstame) {
+		this.firstName = firstame;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getReportingManager() {
+		return reportingManager;
+	}
+
+	public void setReportingManager(String reportingManager) {
+		this.reportingManager = reportingManager;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	} 
+	
 }

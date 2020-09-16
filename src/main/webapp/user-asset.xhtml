@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>User Assets</title>
+</h:head>
+
+<h:body>
+	<p:panel header="Employee Manager" style="font-size:28px;  font-family:impact; background-color:#3c6382"></p:panel>
+	
+	<p:tabMenu style="font-family:impact">
+			<p:menuitem value="User Asset" outcome="user-asset.xhtml"></p:menuitem>
+			<p:menuitem value="Home" outcome="dashboard.xhtml"/>		
+	</p:tabMenu>
+	<h:form>
+		<p:dataScroller value="#{restBean.userAssets}" var="user" chunkSize="10">
+			<f:facet name="header">
+            User information
+        </f:facet>
+
+			<h:panelGrid columns="2" style="width:100%; background-color:#EAF0F1; font-family:tahoma">
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Employee ID:" />
+						<h:outputText value="#{user.id}" style="font-weight: bold" />
+						<h:outputText value="Assets Assigned:" />
+						<!-- Inner data scroller -->
+						<p:dataScroller value="#{user.getAssets()}" var="a" chunkSize="15">
+							<h:panelGrid columns="2" style="width:100%">
+								<p:outputPanel>
+									<h:panelGrid columns="2" cellpadding="5">
+										<h:outputText value="Asset ID:" />
+										<h:outputText value="#{a.assetId}" style="font-weight: bold" />
+										
+										<h:outputText value="Asset Name:" />
+										<h:outputText value="#{a.assetName}" style="font-weight: bold" />
+										
+										<h:outputText value="Asset Type:" />
+										<h:outputText value="#{a.assetType}" style="font-weight: bold" />
+										
+										<h:outputText value="Asset Description:" />
+										<h:outputText value="#{a.assetDescription}" style="font-weight: bold" />
+										
+										<h:outputText value="Assigned By:" />
+										<h:outputText value="#{a.assignedBy}" style="font-weight: bold" />
+										<br></br>
+										<hr width="300px"></hr>
+									</h:panelGrid>
+								</p:outputPanel>
+							</h:panelGrid>
+						</p:dataScroller>
+						<!-- End of inner data scroller -->
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+
+		</p:dataScroller>
+	</h:form>
+	
+	<h:form>
+	</h:form>
+</h:body>
+
+</html>

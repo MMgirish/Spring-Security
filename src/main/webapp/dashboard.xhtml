@@ -1,25 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:p="http://primefaces.org/ui"
-  xmlns:sec="http://www.springframework.org/security/tags">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/tags">
 
 <h:head>
-  <title>DashBoard</title>
+	<title>DashBoard</title>
 </h:head>
-
+	<h:outputStylesheet name="stylesheet.css"></h:outputStylesheet>
 <h:body>
-	<h1>See button below?</h1>
-	<p:button value="Go to Admin Page" outcome="admin.xhtml"></p:button>
+	<p:panel menuTitle="Manager App" toggleable="true" toggleSpeed="500"
+		header="Employee Manager" style="font-family:impact; font-size:28px; background-color:#3c6382">
+		<div style="font-family:Tahoma; font-size: 20px; font-weight: bold; color:white">
+			<h3>Welcome, #{firstName} #{lastName}..! </h3>
+			<h4>You are logged in as #{role}</h4>
+		</div>
+	</p:panel>	
+	<p:tabMenu style="font-family:impact">
+			<p:menuitem value="Home" outcome="dashboard.xhtml"/>
+			<p:menuitem value="Employee Directory" outcome="user-list.xhtml" icon="pi pi-users" rendered="#{role.toString()=='ADMIN'}"/>
+			<p:menuitem value="Add User" outcome="add-user.xhtml" icon="pi pi-user-plus" rendered="#{role.toString()=='ADMIN'}"/>
+			<p:menuitem value="User Assets" outcome="user-asset.xhtml" icon="pi pi-user-plus" rendered="#{role.toString()=='ADMIN'}"/>	
+	</p:tabMenu>
 	
-  <div class="authorization-div">
-    <sec:authorize access="hasRole('USER')">
-      <p:outputLabel value="You have the USER role" />
-    </sec:authorize>
-    <sec:authorize access="hasRole('ADMIN')">
-      <p:outputLabel value="You have the ADMIN role" />
-    </sec:authorize>
-  </div>
+	<p:panel>
+		<p:outputLabel>Employee Detail</p:outputLabel>
+	</p:panel>
+		
+            <p:outputPanel style="background-color:#EAF0F1; font-family:Tahoma">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="Employee Id:" />
+                    <h:outputText value="#{id}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="First Name:" />
+                    <h:outputText value="#{firstName}" style="font-weight: bold"/>
+ 
+                    <h:outputText value="Last Name:" />
+                    <h:outputText value="#{lastName}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Reporting Manager" />
+                    <h:outputText value="#{reportingManager}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="User Name:" />
+                    <h:outputText value="#{username}" style="font-weight: bold"/>
+                    
+                    <h:outputText value="Role:" />
+                    <h:outputText value="#{role}" style="font-weight: bold"/>
+                </h:panelGrid>
+            </p:outputPanel>
+            
+            <p:panel>
+            	<h:outputLabel value="This is Admin only Content.. If you are viewing this, you have admin role" rendered="#{role.toString()=='ADMIN'}"></h:outputLabel>
+            </p:panel>
+            	
+            	
+    <p:panel style="background-color:#3c6382">
+  		<h:form>
+  			<p:commandButton value="Logout" action="#{loginBean.logout()}"></p:commandButton>
+  		</h:form>
+
+  	</p:panel>
+
 </h:body>
 </html>
